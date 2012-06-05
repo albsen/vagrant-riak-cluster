@@ -6,21 +6,21 @@ Vagrant::Config.run do |config|
 
   config.vm.box = "lucid64"
   config.vm.box_url = "http://files.vagrantup.com/lucid64.box"
-  config.vm.customize ["modifyvm", :id, "--memory", 512]
+  config.vm.customize ["modifyvm", :id, "--memory", 256]
 
   config.ssh.forward_agent = true
   
   servers = {
-    :riak1 => {:network => "192.0.2.1", :nodename => "riak3@192.0.2.1"},
-    :riak2 => {:network => "192.0.2.2", :nodename => "riak3@192.0.2.2"},
-    :riak3 => {:network => "192.0.2.3", :nodename => "riak3@192.0.2.3"},
-    :riak4 => {:network => "192.0.2.4", :nodename => "riak4@192.0.2.4"}
+    :riak1 => {:network => "192.0.2.2", :nodename => "riak1@192.0.2.2"},
+    :riak2 => {:network => "192.0.2.3", :nodename => "riak2@192.0.2.3"},
+    :riak3 => {:network => "192.0.2.4", :nodename => "riak3@192.0.2.4"},
+    :riak4 => {:network => "192.0.2.5", :nodename => "riak4@192.0.2.5"}
   }
   
   servers.each do |name, opts|
     config.vm.define name do |riak|
       # uncomment the following line if you want the basebox to start in gui mode
-      riak.vm.boot_mode = :gui
+      # riak.vm.boot_mode = :gui
       riak.vm.network :hostonly, opts[:network]
 
       riak.vm.provision :puppet, :facter => { "riak_node_name" => "riak@#{opts[:network]}" } do |puppet|

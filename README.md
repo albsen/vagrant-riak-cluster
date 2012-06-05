@@ -14,19 +14,19 @@ This fires up 4 vms with riak installed and configured. If you want less vms, ju
 
 All you have to do is to join them together. Navigate to:
 
-  https://192.0.2.1:8068/admin/ui/index.html
+  https://192.0.2.2:8068/admin/ui/index.html
   
 Click on "cluster" and add the following additional nodes to the cluster:
 
-* `riak3@192.0.2.1`
-* `riak3@192.0.2.2`
-* `riak3@192.0.2.3`
-* `riak4@192.0.2.4`
+* `riak1@192.0.2.2`
+* `riak2@192.0.2.3`
+* `riak3@192.0.2.4`
+* `riak4@192.0.2.5`
 
 All nodes are bound to 0.0.0.0, using the following port mapping:
 
 * `http`: `8098`
-* commented `https`: `8068`
+* `https`: `8068`
 * `protocol buffers`: `8087`
 * `handoff`: `8099`
 
