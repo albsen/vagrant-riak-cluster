@@ -54,5 +54,5 @@ class riak {
     ensure => present
   }
   
-  Download["riak/CURRENT/riak_1.1.2-1_amd64.deb"] -> Package["libssl0.9.8"] -> Exec["install"] -> Service["riak"]
+  Download["riak/riak-1.1.2/riak_1.1.2-1_amd64.deb"] -> Package["libssl0.9.8"] -> Exec["install"] -> Service["riak"]
 }
