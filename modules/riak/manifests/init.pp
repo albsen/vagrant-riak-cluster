@@ -13,7 +13,7 @@ class riak {
     }
   }
 
-  download{ "riak/CURRENT/riak_1.1.2-1_amd64.deb":
+  download{ "riak/riak-1.1.2/riak_1.1.2-1_amd64.deb":
     creates => "riak_1.1.2-1_amd64.deb",
     site => "http://downloads.basho.com",
     cwd => "/tmp",
