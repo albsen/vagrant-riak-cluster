@@ -5,6 +5,7 @@ Vagrant::Config.run do |config|
    config.vm.box_url = "http://files.vagrantup.com/precise64.box"
 
   config.vm.customize ["modifyvm", :id, "--memory", 256]
+  config.vm.share_folder("persist_cache", "/vm/persist_cache", "persist_cache", :nfs=> true, :create=> true)
 
   config.ssh.forward_agent = true
   
@@ -21,7 +22,10 @@ Vagrant::Config.run do |config|
       # riak.vm.boot_mode = :gui
       riak.vm.network :hostonly, opts[:network]
 
-      riak.vm.provision :puppet, :facter => { "riak_node_name" => "riak@#{opts[:network]}" } do |puppet|
+      riak.vm.provision :puppet, :facter => {
+        "riak_node_name"                 => "riak@#{opts[:network]}",
+        "riak_data_dir"                  => "/vm/persist_cache",
+      } do |puppet|
         puppet.manifests_path = "manifests"
         puppet.manifest_file = "riakbox.pp"
         puppet.module_path = ["modules"]
